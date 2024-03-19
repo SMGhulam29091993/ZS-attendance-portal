@@ -71,7 +71,7 @@ const UpdateProfile = () => {
         <h1 className='text-3xl text-center text-orange-500 mb-8'>
           Update Profile
         </h1>
-        {error && <p className='text-red-500 mt-5 text-center'>{error}</p>}
+        
         <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
             
             <input type="text" placeholder='Name' className='rounded-lg border p-3 bg-slate-300' 
