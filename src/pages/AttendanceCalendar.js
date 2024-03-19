@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { userSelector } from '../redux/user/userSlice';
+import { useParams } from 'react-router-dom';
 
 const AttendanceCalendar = () => {
+  const {currentUser, token} = useSelector(userSelector);
+  const [error,setError] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [attendanceStatus, setAttendanceStatus] = useState('');
   const [markedDates, setMarkedDates] = useState([]);
@@ -15,12 +20,26 @@ const AttendanceCalendar = () => {
 
   const fetchAttendanceData = async () => {
     try {
+      const res = await axios.get(`http://localhost:8000/api/v1/attendance/get-attendance/${currentUser._id}`,{
+        headers: {
+          "Content-Type" : "application/json",
+          Authorization : `Bearer ${token}`
+        }
+      })
+      const responseData = res.data;
+      console.log("Get Attendance :",responseData.attendance);
       // Example hardcoded data for marked dates with their status
-      const attendanceData = {
-        "2024-03-18": "present",
-        "2024-03-17": "absent",
-        "2024-03-15": "present"
-      };
+
+      // const attendanceDate = responseData.attendance.date;
+      // const attendanceStatus = responseData.attendance.status;
+
+      const attendanceArray = responseData.attendance;
+
+    // Create the attendanceData object using map function
+      const attendanceData = {};
+      attendanceArray.map(item => {
+        attendanceData[item.date] = item.status;
+      });
 
       const dates = Object.keys(attendanceData);
       const attendanceStatuses = Object.values(attendanceData);
@@ -50,11 +69,23 @@ const AttendanceCalendar = () => {
     try {
       const formattedDate = formatDate(selectedDate);
       console.log(formattedDate);
-      // // Example POST request to mark attendance for the selected date
-      // await axios.post('/api/attendance', {
-      //   date: formattedDate,
-      //   status: attendanceStatus
-      // });
+      const data = {
+        userID : currentUser._id,
+        date: formattedDate,
+        status: attendanceStatus
+      }
+      // Example POST request to mark attendance for the selected date
+      const res = await axios.post(`http://localhost:8000/api/v1/attendance/post-attendance/${currentUser._id}`,data,{
+        headers :{
+          "Content-Type" : "application/json",
+          Authorization : `Bearer ${token}`
+        }
+      });
+      const responseData = res.data;
+      if(!responseData.success){
+        setError(responseData.message);
+        return;
+      }
       // Update marked dates array and attendance status by date
       setMarkedDates([...markedDates, formattedDate]);
       setAttendanceStatusByDate({ ...attendanceStatusByDate, [formattedDate]: attendanceStatus });
@@ -80,14 +111,23 @@ const AttendanceCalendar = () => {
   };
 
   const updateAttendanceRecord = async (date, status) => {
-      // try {
-      //   // Example PUT request to update attendance record
-      //   await axios.put(`/api/attendance/${date}`, { status });
-      //   alert('Attendance record updated successfully!');
-      // } catch (error) {
-      //   console.error('Error updating attendance record:', error);
-      //   alert('Failed to update attendance record. Please try again.');
-      // }
+      try {
+        const data = {
+          date, 
+          status
+        }
+        // Example PUT request to update attendance record
+        await axios.post(`http://localhost:8000/api/v1/attendance/update-attendance/${currentUser._id}`, data,{
+          headers:{
+            "Content-Type" : "application/json",
+            Authorization : `Bearer ${token}`
+          }
+        });
+        alert('Attendance record updated successfully!');
+      } catch (error) {
+        console.error('Error updating attendance record:', error);
+        alert('Failed to update attendance record. Please try again.');
+      }
   };
 
   const tileContent = ({ date }) => {
