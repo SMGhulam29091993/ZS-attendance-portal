@@ -13,7 +13,7 @@ const Header = ()=>{
     const handleLogOut = async ()=>{
         try {
             dispatch(logOutStart())
-            const res = await axios.get(`http://localhost:8000/api/v1/user/sign-out`);
+            const res = await axios.get(`https://zs-attendance-portal.onrender.com/api/v1/user/sign-out`);
             const responseData = res.data;
             console.log(responseData);
             if(!responseData.success){
