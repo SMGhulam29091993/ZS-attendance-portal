@@ -30,3 +30,9 @@ code {
   background-color:red ; /* Color of the dot */
   border-radius: 50%; /* Make the dot round */
 }
+.half-day {
+  width: 8px;
+  height: 8px;
+  background-color:yellow; /* Color of the dot */
+  border-radius: 50%; /* Make the dot round */
+}

@@ -4,7 +4,8 @@ import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../redux/user/userSlice';
-import { useParams } from 'react-router-dom';
+import DayIndicator from '../Component/Day-Indicator';
+
 
 const AttendanceCalendar = () => {
   const {currentUser, token} = useSelector(userSelector);
@@ -28,10 +29,6 @@ const AttendanceCalendar = () => {
       })
       const responseData = res.data;
       console.log("Get Attendance :",responseData.attendance);
-      // Example hardcoded data for marked dates with their status
-
-      // const attendanceDate = responseData.attendance.date;
-      // const attendanceStatus = responseData.attendance.status;
 
       const attendanceArray = responseData.attendance;
 
@@ -117,7 +114,7 @@ const AttendanceCalendar = () => {
           status
         }
         // Example PUT request to update attendance record
-        await axios.post(`http://localhost:8000/api/v1/attendance/update-attendance/${currentUser._id}`, data,{
+        await axios.put(`http://localhost:8000/api/v1/attendance/update-attendance/${currentUser._id}`, data,{
           headers:{
             "Content-Type" : "application/json",
             Authorization : `Bearer ${token}`
@@ -149,26 +146,32 @@ const AttendanceCalendar = () => {
   };
 
   return (
-    <div>
-      <h2>Mark Attendance</h2>
-      <div>
-        <Calendar
-          onChange={handleDateChange}
-          value={selectedDate}
-          tileContent={tileContent}
-        />
+    <div className='max-w-6xl mx-auto'>
+      <div className='flex flex-col items-center justify-center gap-4 my-6 p-2 w-full'>
+        <h2 className='text-center font-semibold text-orange-600 text-3xl'>Mark Attendance</h2>
+        {error && <p className='text-red-700'>{error}</p>}
+        <div className='flex gap-3'>
+          <Calendar
+            onChange={handleDateChange}
+            value={selectedDate}
+            tileContent={tileContent}
+          />
+          <DayIndicator/>
+        </div>
+   
+        <label className='text-md font-semibold text-slate-600 flex gap-4'>
+          Attendance Status:
+          <select value={attendanceStatus} onChange={(e) => setAttendanceStatus(e.target.value)}
+            className='text-md font-semibold text-slate-900 border border-slate-950 outline-none rounded'>
+            <option value="">Select Status</option>
+            <option value="present">Present</option>
+            <option value="absent">Absent</option>
+            <option value="half-day">Half Day</option>
+          </select>
+        </label>
+        <button onClick={handleMarkAttendance}
+          className='bg-blue-600 p-2 rounded-lg uppercase text-white'>Mark Attendance</button>
       </div>
-      <div>
-         <label>
-           Attendance Status:
-           <select value={attendanceStatus} onChange={(e) => setAttendanceStatus(e.target.value)}>
-             <option value="">Select Status</option>
-             <option value="present">Present</option>
-             <option value="absent">Absent</option>
-           </select>
-         </label>
-        <button onClick={handleMarkAttendance}>Mark Attendance</button>
-       </div>
     </div>
   );
 };
