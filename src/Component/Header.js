@@ -4,6 +4,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutFailure, logOutStart, logOutSuccess, userSelector } from '../redux/user/userSlice';
 import Dropdown from './DropDown';
+import { FaBars} from 'react-icons/fa';
 
 
 const Header = ()=>{
