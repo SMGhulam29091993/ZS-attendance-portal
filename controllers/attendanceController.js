@@ -26,8 +26,9 @@ module.exports.updateAttendance = async (req, res, next) => {
         return res.status(400).json({ message: "You are not authorized for this.", success: false });
     }
     try {
-        const attendance = await Attendance.findOne({ userID: userId });
-        if (attendance && attendance.date === req.body.date) {
+        const attendance = await Attendance.findOne({ userID: userId, date: req.body.date });
+        console.log(attendance._id)
+        if (attendance) {
             attendance.status = req.body.status;
             await attendance.save();
             return res.status(200).json({ message: "Attendance updated successfully.", success: true, attendance });
@@ -38,6 +39,7 @@ module.exports.updateAttendance = async (req, res, next) => {
         next(error);
     }
 };
+
 
 
 module.exports.getAttendance = async (req, res, next) => {

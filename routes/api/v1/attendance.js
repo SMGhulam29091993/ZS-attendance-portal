@@ -9,7 +9,7 @@ router.get("/test", (req,res)=>{
 });
 router.get("/get-attendance/:id", verifyUser, attendanceController.getAttendance)
 router.post("/post-attendance/:id",verifyUser, attendanceController.addAttendance );
-router.post("/update-attendance/:id", verifyUser, attendanceController.updateAttendance)
+router.put("/update-attendance/:id", verifyUser, attendanceController.updateAttendance)
 
 
 module.exports = router;
