@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 
-// mongoose.connect("mongodb+srv://smghulamghausfaiyaz19:Ghul%40m29091993gh%40u%24@habbit-tracker.8klhauo.mongodb.net/followup-reminder");
-mongoose.connect("mongodb://127.0.0.1:27017/attendance_portal");
+mongoose.connect(process.env.MONGO_URL);
+// mongoose.connect("mongodb://127.0.0.1:27017/attendance_portal");
 
 const db = mongoose.connection;
 
