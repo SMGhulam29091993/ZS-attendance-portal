@@ -21,7 +21,7 @@ const AttendanceCalendar = () => {
 
   const fetchAttendanceData = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/api/v1/attendance/get-attendance/${currentUser._id}`,{
+      const res = await axios.get(`https://zs-attendance-portal.onrender.com/api/v1/attendance/get-attendance/${currentUser._id}`,{
         headers: {
           "Content-Type" : "application/json",
           Authorization : `Bearer ${token}`
@@ -72,7 +72,7 @@ const AttendanceCalendar = () => {
         status: attendanceStatus
       }
       // Example POST request to mark attendance for the selected date
-      const res = await axios.post(`http://localhost:8000/api/v1/attendance/post-attendance/${currentUser._id}`,data,{
+      const res = await axios.post(`https://zs-attendance-portal.onrender.com/api/v1/attendance/post-attendance/${currentUser._id}`,data,{
         headers :{
           "Content-Type" : "application/json",
           Authorization : `Bearer ${token}`
@@ -114,7 +114,7 @@ const AttendanceCalendar = () => {
           status
         }
         // Example PUT request to update attendance record
-        await axios.put(`http://localhost:8000/api/v1/attendance/update-attendance/${currentUser._id}`, data,{
+        await axios.put(`https://zs-attendance-portal.onrender.com/api/v1/attendance/update-attendance/${currentUser._id}`, data,{
           headers:{
             "Content-Type" : "application/json",
             Authorization : `Bearer ${token}`

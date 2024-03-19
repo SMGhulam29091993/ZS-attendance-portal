@@ -17,7 +17,7 @@ const Profile = () => {
 
   const fetchImage = async ()=>{
     try {
-      const resImage = await axios.get(`http://localhost:8000/api/v1/user/get-image/${userID}`);
+      const resImage = await axios.get(`https://zs-attendance-portal.onrender.com/api/v1/user/get-image/${userID}`);
       const responseData = resImage.data;
       console.log(responseData.image);
       if (responseData.success) {
@@ -38,7 +38,7 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("file", file);
     try {
-      const res = await axios.post(`http://localhost:8000/api/v1/user/uploadImage/${userID}`,formData);
+      const res = await axios.post(`https://zs-attendance-portal.onrender.com/api/v1/user/uploadImage/${userID}`,formData);
       const responseData = res.data;
       console.log(responseData.message);
       if (responseData.success) {

@@ -28,7 +28,7 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       dispatch(updateStart());
-      const res = await axios.put(`http://localhost:8000/api/v1/user/update-profile/${userID}`, formData,{
+      const res = await axios.put(`https://zs-attendance-portal.onrender.com/api/v1/user/update-profile/${userID}`, formData,{
         headers : {
           'Content-Type' : 'application/json',
           Authorization : `Bearer ${token}`

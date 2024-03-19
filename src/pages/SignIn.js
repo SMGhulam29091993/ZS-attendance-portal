@@ -25,7 +25,7 @@ const SignIn = () => {
         console.log(formData);
         try {
             dispatch(signInStart())
-            const res = await axios.post(`http://localhost:8000/api/v1/user/sign-in`, formData);
+            const res = await axios.post(`https://zs-attendance-portal.onrender.com/api/v1/user/sign-in`, formData);
             const responseData = res.data;
             console.log(responseData);
             if(!responseData.success){
