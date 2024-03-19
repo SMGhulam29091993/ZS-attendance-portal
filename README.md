@@ -69,9 +69,7 @@ Contributions to the ZS Attendance Portal are welcome! If you'd like to contribu
 4. Push your changes to your fork.
 5. Submit a pull request to the main repository's `main` branch.
 
-## License
 
-This project is licensed under the [MIT License](LICENSE).
 
 ---
 
