@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+// Header.js
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutFailure, logOutStart, logOutSuccess, userSelector } from '../redux/user/userSlice';
 import Dropdown from './DropDown';
-import { FaBars} from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 
-
-const Header = ()=>{
-    const {currentUser} = useSelector(userSelector);
+const Header = () => {
+    const { currentUser } = useSelector(userSelector);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -18,71 +18,72 @@ const Header = ()=>{
         setShowMenu(!showMenu);
     };
 
-    const handleLogOut = async ()=>{
+    const handleLogOut = async () => {
         try {
-            dispatch(logOutStart())
+            dispatch(logOutStart());
             const res = await axios.get(`https://zs-attendance-portal.onrender.com/api/v1/user/sign-out`);
             const responseData = res.data;
             console.log(responseData);
-            if(!responseData.success){
+            if (!responseData.success) {
                 dispatch(logOutFailure(responseData.message));
                 return;
             }
             dispatch(logOutSuccess());
-            
-
-            navigate("/sign-in")
+            navigate("/sign-in");
         } catch (error) {
-            if (error.response){
+            if (error.response) {
                 console.error("Response Data:", error.response.data);
-            }else if(error.request){
+            } else if (error.request) {
                 console.error("No response received from server:", error.request);
-            }else{
+            } else {
                 console.error("Request setup error:", error.message);
             }
         }
-    }
+    };
 
-  return (
-    <>
-        <header className=' bg-slate-600 shadow-md shadow-slate-600 '>
-            <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
-                <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
-                    <span className='text-lime-300 italic font-semibold'>attendance</span>
-                    <span className='text-amber-500 font-sans '>Portal</span>
-                </h1>
-                
-                <ul className='flex items-center gap-4 text-white'>
-                    <li><FaBars className="block md:hidden text-black" onClick={toggleMenu} /></li>
-                        {showMenu?(<Dropdown currentUser={currentUser} handleLogOut={handleLogOut}/>):(
-                            <>
-                            
+    return (
+        <>
+            <header className='bg-slate-600 shadow-md shadow-slate-600'>
+                <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
+                    <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
+                        <span className='text-lime-300 italic font-semibold'>attendance</span>
+                        <span className='text-amber-500 font-sans'>Portal</span>
+                    </h1>
+
+                    <div>
+                        <FaBars className="block md:hidden text-white" onClick={toggleMenu} />
+                        {/* Show header menu items */}
+                        <ul className='flex gap-4 text-white'>
                             <Link to="/">
                                 <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>Home</li>
                             </Link>
-                            {currentUser?(
-                                <>                         
+                            {currentUser ? (
+                                <>
                                     <Link to="/attendance">
                                         <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>Attendance</li>
                                     </Link>
                                     <Link to={`/profile/${currentUser._id}`}>
-                                        <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>{currentUser?currentUser.name.split(" ")[0] : "Profile"}</li>
+                                        <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>{currentUser ? currentUser.name.split(" ")[0] : "Profile"}</li>
                                     </Link>
                                     <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white' onClick={handleLogOut}>Log-Out</li>
-                                </>   
-                            ):(
+                                </>
+                            ) : (
                                 <Link to="/sign-in">
                                     <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>Sign-in</li>
                                 </Link>
                             )}
-                        </>
-                        )}                          
-                </ul>
-            </div>
-        </header>
-        
-    </>
-  )
-}
+                        </ul>
+                        
+                    </div>
+                    
+                    
+                    
+                </div>
+            </header>
+            {/* Show dropdown menu on small screens */}
+            {showMenu && <Dropdown currentUser={currentUser} toggleMenu={toggleMenu} handleLogOut={handleLogOut} />}
+        </>
+    );
+};
 
-export default Header
+export default Header;
