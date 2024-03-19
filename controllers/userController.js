@@ -2,7 +2,8 @@ const User = require("../models/user.js");
 const bcryptjs = require("bcryptjs");
 const cookie = require('cookie');
 const jwt = require("jsonwebtoken");
-
+const path = require("path");
+const fs = require("fs");
 
 module.exports.register = async (req,res,next)=>{
     const {password}=req.body;
