@@ -3,12 +3,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutFailure, logOutStart, logOutSuccess, userSelector } from '../redux/user/userSlice';
+import Dropdown from './DropDown';
 
 
 const Header = ()=>{
     const {currentUser} = useSelector(userSelector);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const [showMenu, setShowMenu] = useState(false);
+
+    const toggleMenu = () => {
+        setShowMenu(!showMenu);
+    };
 
     const handleLogOut = async ()=>{
         try {
@@ -45,26 +52,29 @@ const Header = ()=>{
                 </h1>
                 
                 <ul className='flex items-center gap-4 text-white'>
-                    <Link to="/">
-                        <li className='text-sm md:text-md md:inline  font-semibold hover:underline cursor-pointer text-white'>Home</li>
-                    </Link>
-                    {currentUser?(
-                        <>                         
-                            <Link to="/attendance">
-                                <li className='text-sm md:text-md md:inline font-semibold hover:underline cursor-pointer text-white'>Attendance</li>
+                    <li><FaBars className="block md:hidden text-white" onClick={toggleMenu} /></li>
+                        {showMenu?(<Dropdown currentUser={currentUser} toggleMenu={toggleMenu}/>):(
+                            <>
+                            
+                            <Link to="/">
+                                <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>Home</li>
                             </Link>
-                            <Link to={`/profile/${currentUser._id}`}>
-                                <li className='text-sm md:text-md md:inline font-semibold hover:underline cursor-pointer text-white'>{currentUser?currentUser.name.split(" ")[0] : "Profile"}</li>
-                            </Link>
-                            <li className='text-sm md:text-md md:inline font-semibold hover:underline cursor-pointer text-white' onClick={handleLogOut}>Log-Out</li>
-                        </>   
-                    ):(
-                        <Link to="/sign-in">
-                            <li className='text-sm md:text-md md:inline font-semibold hover:underline cursor-pointer text-white'>Sign-in</li>
-                        </Link>
-                    )}
-                    
-                    
+                            {currentUser?(
+                                <>                         
+                                    <Link to="/attendance">
+                                        <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>Attendance</li>
+                                    </Link>
+                                    <Link to={`/profile/${currentUser._id}`}>
+                                        <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>{currentUser?currentUser.name.split(" ")[0] : "Profile"}</li>
+                                    </Link>
+                                    <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white' onClick={handleLogOut}>Log-Out</li>
+                                </>   
+                            ):(
+                                <Link to="/sign-in">
+                                    <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>Sign-in</li>
+                                </Link>
+                            )}
+                        </>)}                          
                 </ul>
             </div>
         </header>

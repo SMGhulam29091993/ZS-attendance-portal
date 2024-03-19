@@ -150,7 +150,7 @@ const AttendanceCalendar = () => {
       <div className='flex flex-col items-center justify-center gap-4 my-6 p-2 w-full'>
         <h2 className='text-center font-semibold text-orange-600 text-3xl'>Mark Attendance</h2>
         {error && <p className='text-red-700'>{error}</p>}
-        <div className='flex gap-3'>
+        <div className='flex gap-3 flex-wrap'>
           <Calendar
             onChange={handleDateChange}
             value={selectedDate}
