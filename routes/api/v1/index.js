@@ -5,5 +5,6 @@ router.get("/test", (req,res)=>{
     res.status(200).send({message : "The backend is working fine!"})
 });
 router.use("/user", require("./user"));
+router.use("/attendance", require("./attendance"));
 
 module.exports = router;
