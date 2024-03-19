@@ -14,30 +14,21 @@ function Dropdown({ currentUser,toggleMenu }) {
                 Home
               </Link>
             </li>
-            <li className="px-4 py-2 hover:bg-gray-200">
-              <Link to="/about"  onClick={toggleMenu} >
-                About
-              </Link>
-            </li>
-            <li className="px-4 py-2 hover:bg-gray-200">
-              {currentUser ? (
-                <Link to="/profile" onClick={toggleMenu} >
-                  {currentUser.user?.avatar || currentUser.avatar ? (
-                    <img
-                      src={currentUser.user?.avatar || currentUser.avatar}
-                      alt="Profile"
-                      className="w-7 h-7 rounded-full mr-2 inline-block"
-                    />
-                  ) : (
-                    <span>{currentUser.user?.username || currentUser.username || 'Profile'}</span>
-                  )}
+            {currentUser?(
+                <>                         
+                    <Link to="/attendance">
+                        <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-black'>Attendance</li>
+                    </Link>
+                    <Link to={`/profile/${currentUser._id}`}>
+                        <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-black'>{currentUser?currentUser.name.split(" ")[0] : "Profile"}</li>
+                    </Link>
+                    <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-black' onClick={handleLogOut}>Log-Out</li>
+                </>   
+            ):(
+                <Link to="/sign-in">
+                    <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-black'>Sign-in</li>
                 </Link>
-              ) : (
-                <Link to="/sign-in"  onClick={toggleMenu}>
-                  Sign-In
-                </Link>
-              )}
-            </li>
+            )}
           </ul>
         </div>
     </div>

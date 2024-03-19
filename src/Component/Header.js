@@ -53,7 +53,7 @@ const Header = ()=>{
                 </h1>
                 
                 <ul className='flex items-center gap-4 text-white'>
-                    <li><FaBars className="block md:hidden text-white" onClick={toggleMenu} /></li>
+                    <li><FaBars className="block md:hidden text-black" onClick={toggleMenu} /></li>
                         {showMenu?(<Dropdown currentUser={currentUser} toggleMenu={toggleMenu}/>):(
                             <>
                             
@@ -75,7 +75,8 @@ const Header = ()=>{
                                     <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>Sign-in</li>
                                 </Link>
                             )}
-                        </>)}                          
+                        </>
+                        )}                          
                 </ul>
             </div>
         </header>
