@@ -21,7 +21,7 @@ const UpdateProfile = () => {
       });
   }
 
-  console.log(formData,);
+  
 
 
   const handleSubmit = async (e)=>{
