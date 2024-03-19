@@ -1,35 +1,8 @@
 
 import { Link } from 'react-router-dom';
 
-function Dropdown({ currentUser,toggleMenu }) {
-    const {currentUser} = useSelector(userSelector);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const handleLogOut = async ()=>{
-      try {
-          dispatch(logOutStart())
-          const res = await axios.get(`https://zs-attendance-portal.onrender.com/api/v1/user/sign-out`);
-          const responseData = res.data;
-          console.log(responseData);
-          if(!responseData.success){
-              dispatch(logOutFailure(responseData.message));
-              return;
-          }
-          dispatch(logOutSuccess());
-          
-
-          navigate("/sign-in")
-      } catch (error) {
-          if (error.response){
-              console.error("Response Data:", error.response.data);
-          }else if(error.request){
-              console.error("No response received from server:", error.request);
-          }else{
-              console.error("Request setup error:", error.message);
-          }
-      }
-  }
+function Dropdown({ currentUser,toggleMenu,handleLogOut }) {
+  
 
   return (
     <div className="relative ">

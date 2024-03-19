@@ -54,7 +54,7 @@ const Header = ()=>{
                 
                 <ul className='flex items-center gap-4 text-white'>
                     <li><FaBars className="block md:hidden text-black" onClick={toggleMenu} /></li>
-                        {showMenu?(<Dropdown currentUser={currentUser} toggleMenu={toggleMenu}/>):(
+                        {showMenu?(<Dropdown currentUser={currentUser} toggleMenu={toggleMenu} handleLogOut={handleLogOut}/>):(
                             <>
                             
                             <Link to="/">
