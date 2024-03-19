@@ -82,9 +82,6 @@ module.exports.updateUser = async (req, res, next) => {
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.password,
-                designation: req.body.designation,
-                contact: req.body.contact,
-                organization: req.body.organization
             }
         }, { new: true });
 
