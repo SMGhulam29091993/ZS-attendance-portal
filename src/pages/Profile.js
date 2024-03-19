@@ -53,8 +53,8 @@ const Profile = () => {
 
   return (
     <>
-      <div className='max-w-6xl my-5 border border-black mx-auto'>
-        <div className='max-w-xs sm:max-w-lg border border-red-600 p-2 flex flex-col'>
+      <div className='max-w-6xl my-5 border  mx-auto'>
+        <div className='max-w-xs sm:max-w-lg  p-2 flex flex-col'>
           <div className='image-name-container p-2 flex gap-4 items-center'>
             <form encType='multipart/form-data' className='flex flex-col gap-2' onSubmit={handleSubmit}>
               <input type="file" accept='image/.*' id="image" ref={fileRef} hidden onClick={(e)=>e.stopPropagation()} onChange={(e)=>setFile(e.target.files[0])}/>
