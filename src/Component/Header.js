@@ -46,21 +46,21 @@ const Header = ()=>{
                 
                 <ul className='flex items-center gap-4 text-white'>
                     <Link to="/">
-                        <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>Home</li>
+                        <li className='text-sm md:text-md md:inline  font-semibold hover:underline cursor-pointer text-white'>Home</li>
                     </Link>
                     {currentUser?(
                         <>                         
                             <Link to="/attendance">
-                                <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>Attendance</li>
+                                <li className='text-sm md:text-md md:inline font-semibold hover:underline cursor-pointer text-white'>Attendance</li>
                             </Link>
                             <Link to={`/profile/${currentUser._id}`}>
-                                <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>{currentUser?currentUser.name.split(" ")[0] : "Profile"}</li>
+                                <li className='text-sm md:text-md md:inline font-semibold hover:underline cursor-pointer text-white'>{currentUser?currentUser.name.split(" ")[0] : "Profile"}</li>
                             </Link>
-                            <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white' onClick={handleLogOut}>Log-Out</li>
+                            <li className='text-sm md:text-md md:inline font-semibold hover:underline cursor-pointer text-white' onClick={handleLogOut}>Log-Out</li>
                         </>   
                     ):(
                         <Link to="/sign-in">
-                            <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>Sign-in</li>
+                            <li className='text-sm md:text-md md:inline font-semibold hover:underline cursor-pointer text-white'>Sign-in</li>
                         </Link>
                     )}
                     
