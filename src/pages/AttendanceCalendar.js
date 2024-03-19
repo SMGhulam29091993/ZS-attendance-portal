@@ -94,8 +94,8 @@ const AttendanceCalendar = () => {
   };
 
   const handleEditAttendance = (date) => {
-    const newStatus = window.prompt('Enter attendance status (present/absent):');
-    if (newStatus && (newStatus === 'present' || newStatus === 'absent')) {
+    const newStatus = window.prompt('Enter attendance status (present/absent/half-day):');
+    if (newStatus && (newStatus === 'present' || newStatus === 'absent' || newStatus === 'half-day')) {
       // If a valid status is entered, update the attendance status for the specific date
       const formattedDate = formatDate(date);
       setAttendanceStatusByDate({ ...attendanceStatusByDate, [formattedDate]: newStatus });
