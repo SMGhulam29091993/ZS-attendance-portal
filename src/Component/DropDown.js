@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom';
 
-function Dropdown({ currentUser,toggleMenu,handleLogOut }) {
+function Dropdown({ currentUser,handleLogOut }) {
   
 
   return (
@@ -10,7 +10,7 @@ function Dropdown({ currentUser,toggleMenu,handleLogOut }) {
         <div className="absolute z-10 -right-5 top-5 mt-2 w-48 bg-slate-100 rounded-lg shadow-xl">
           <ul className="py-2">
             <li className="px-4 py-2 hover:bg-gray-200">
-              <Link to="/" onClick={toggleMenu}>
+              <Link to="/" >
                 Home
               </Link>
             </li>
