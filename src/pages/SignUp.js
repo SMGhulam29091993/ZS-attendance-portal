@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
  
 const SignUp = () => {
-    const [formData,setFormData] = useState({name:"", email:"",password: "",contact:"", designation:"", organization:""});
+    const [formData,setFormData] = useState({name:"", email:"",password: ""});
     const [loading,setLoading] = useState(false);
     const [error,setError] = useState(null);
 
@@ -68,27 +68,7 @@ const SignUp = () => {
                         <input type='password' placeholder='Enter your password' value={formData.password} onChange={handleChange} id='password'
                             className='border border-slate-700 rounded p-1 outline-none bg-transparent' style={{width:"70%"}} required/>
                     </div>
-                    <div className='flex items-center flex-wrap gap-4 mb-2'>
-                        <label style={{width:"20%"}}>
-                            Contact Number 
-                        </label>
-                        <input type='text' placeholder='Enter your contact number' value={formData.contact} onChange={handleChange} id='contact'
-                            className='border border-slate-700 rounded p-1 outline-none bg-transparent' style={{width:"70%"}} required />
-                    </div>
-                    <div className='flex items-center flex-wrap gap-4 mb-2'>
-                        <label style={{width:"20%"}}>
-                            Designation 
-                        </label>
-                        <input type='text' placeholder='Enter your designation' value={formData.designation} onChange={handleChange} id='designation'
-                            className='border border-slate-700 rounded p-1 outline-none bg-transparent' style={{width:"70%"}} required/>
-                    </div>
-                    <div className='flex items-center flex-wrap gap-4 mb-2'>
-                        <label style={{width:"20%"}}>
-                            Organization 
-                        </label>
-                        <input type='text' placeholder='Enter your organization name' value={formData.organization} onChange={handleChange} id='organization'
-                            className='border border-slate-700 rounded p-1 outline-none bg-transparent' style={{width:"70%"}} required/>
-                    </div>
+                    
                     <button disabled={loading} type='submit' className='w-full bg-blue-700 p-3 text-white rounded-lg uppercase hover:opacity-90 disabled:opacity-70'>
                         {loading?"Processing":"Sign Up"}
                     </button>

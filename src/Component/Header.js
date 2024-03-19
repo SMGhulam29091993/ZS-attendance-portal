@@ -50,7 +50,7 @@ const Header = ()=>{
                     </Link>
                     {currentUser?(
                         <>                         
-                            <Link>
+                            <Link to="/attendance">
                                 <li className='hidden md:inline font-semibold hover:underline cursor-pointer text-white'>Attendance</li>
                             </Link>
                             <Link to={`/profile/${currentUser._id}`}>
