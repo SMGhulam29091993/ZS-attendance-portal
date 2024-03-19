@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 8000;
 const db = require("./config/mongoose.js");
 const errHandlerMiddlware = require("./config/errorHanderMiddleware.js");
 
-const allowOrigin = ["http://localhost:3000"]
+const allowOrigin = ["http://localhost:3000","https://zs-attendance-portal-1.onrender.com"]
 app.use(cors({
     origin :allowOrigin,
     credentials : true
