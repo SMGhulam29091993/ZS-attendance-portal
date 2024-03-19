@@ -58,7 +58,7 @@ const Profile = () => {
           <div className='image-name-container p-2 flex gap-4 items-center'>
             <form encType='multipart/form-data' className='flex flex-col gap-2' onSubmit={handleSubmit}>
               <input type="file" accept='image/.*' id="image" ref={fileRef} hidden onClick={(e)=>e.stopPropagation()} onChange={(e)=>setFile(e.target.files[0])}/>
-              <img src={`http://localhost:8000/${image}`} alt="profileImage" className='h-16 w-16 sm:h-36 sm:w-36 rounded-full border border-black cursor-pointer self-center'
+              <img src={`https://zs-attendance-portal.onrender.com/${image}`} alt="profileImage" className='h-16 w-16 sm:h-36 sm:w-36 rounded-full border border-black cursor-pointer self-center'
                onClick={()=>fileRef.current.click()}/>
               {file && <button className='bg-blue-600 p-1 rounded text-white uppercase'>Upload Image</button>}
             </form>
